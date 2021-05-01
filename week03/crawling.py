@@ -7,8 +7,19 @@ response = requests.get(
     headers=headers
 )
 
-print(response.text)
+# print(response.text)
 
 # HTML 데이터 가공
 soup = BeautifulSoup(
     response.text, 'html.parser')
+
+
+selector = '#old_content > table > tbody > tr'
+title_selector = 'td.title > div > a'
+titles = soup.select(selector)
+
+for title in titles:
+    title_tag = title.select_one(title_selector)
+
+    if title_tag:
+        print(title_tag.text)
