@@ -33,3 +33,20 @@ response = requests.get(
 )
 
 pprint.pprint(response.json())
+
+papago_url = 'https://openapi.naver.com/v1/papago/n2mt'
+
+data = {
+    'source': 'ko',
+    'target': 'en',
+    'text': '만나서 반갑습니다',
+}
+
+response = requests.post(
+    papago_url,
+    headers=headers,
+    data=data
+)
+
+result = response.json()
+print(result['message']['result']['translatedText'])
