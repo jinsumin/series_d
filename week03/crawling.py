@@ -22,4 +22,6 @@ for title in titles:
     title_tag = title.select_one(title_selector)
 
     if title_tag:
-        print(title_tag.text)
+        rank = title.select_one('td:nth-child(1) > img')
+        point = title.select_one('td.point')
+        print(rank['alt'], title_tag.text, point.text)
