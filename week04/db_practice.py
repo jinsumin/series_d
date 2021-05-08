@@ -60,3 +60,21 @@ movies = list(movies_documents)  # 바로 DB 접속해서 가져오도록 list()
 # 지연된 평가
 # 만약 movies_documents 선언하고 한참... 나중에 사용한다면?
 # print(movies_documents)
+
+movies_documents = db.movies.find(
+    {'rank': 1},  # 검색조건
+    {'_id': False},  # 데이터 표현방법 -> _id 값은 필요없으니 빼고 가져온다
+)
+movies = list(movies_documents)  # 바로 DB 접속해서 가져오도록 list() 사용
+print(movies)
+
+movies_documents = db.movies.find(
+    # 검색조건
+    # $lte : 이하
+    # $gte : 이상
+    # $in : 여러 개 조건에 매칭되는
+    {'rank': {'$in': [1, 10]}},
+    {'_id': False},  # 데이터 표현방법 -> _id 값은 필요없으니 빼고 가져온다
+)
+movies = list(movies_documents)  # 바로 DB 접속해서 가져오도록 list() 사용
+print(movies)
